@@ -1,8 +1,12 @@
 import _ from 'lodash/fp'
+import F from 'futil'
 import config from 'config'
 import { Queue, Scheduler, MultiWorker } from 'node-resque'
 
-let redisConnection = _.pick(['host', 'pkg'], config.get('redis'))
+let redisConnection = F.compactObject(config.get('redis'))
+if (redisConnection.options) {
+  redisConnection.options = F.compactObject(redisConnection.options)
+}
 
 export let getQueue = async jobs => {
   let queue = new Queue({ connection: redisConnection }, jobs)

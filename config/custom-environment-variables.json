@@ -1,8 +1,10 @@
 {
     "redis": {
         "host": "REDIS_HOST",
-        "password": "REDIS_PASSWORD",
-        "port": "REDIS_PORT"
+        "port": "REDIS_PORT",
+        "options": {
+            "password": "REDIS_PASSWORD"
+        }
     },
     "reddit": {
         "clientId": "REDDIT_CLIENT_ID",
