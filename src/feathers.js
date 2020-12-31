@@ -10,7 +10,7 @@ app.use(express.json())
 // Parse URL-encoded params
 app.use(express.urlencoded({ extended: true }))
 // Host static files from the current folder
-app.use(express.static(__dirname))
+app.use(express.static(__dirname.replace('/src', '/public')))
 // Add REST API support
 app.configure(express.rest())
 // Register a nicer error handler than the default Express one

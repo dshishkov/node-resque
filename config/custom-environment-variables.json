@@ -24,5 +24,6 @@
     },
     "feathers": {
         "port": "PORT"
-    }
+    },
+    "pingUrl": "PING_URL"
 }
