@@ -10,7 +10,7 @@
     },
     "alpaca": {
         "keyId": "ALPACA_KEY",
-        "secretKey": "ALPACA_SECRET",
+        "secretKey": "ALPACA_SECRET"
     },
     "symbols": {
         "__name": "SYMBOLS",
