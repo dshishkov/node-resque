@@ -6,6 +6,7 @@ import {
   retryFailedJobs,
   getScheduler,
 } from './util/resque'
+import './feathers'
 
 let init = async () => {
   let [queue, worker, scheduler] = await Promise.all([

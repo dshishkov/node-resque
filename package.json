@@ -17,6 +17,9 @@
   "license": "ISC",
   "dependencies": {
     "@alpacahq/alpaca-trade-api": "^1.4.2",
+    "@feathersjs/configuration": "^4.5.11",
+    "@feathersjs/express": "^4.5.11",
+    "@feathersjs/feathers": "^4.5.11",
     "bluebird": "^3.7.2",
     "config": "^3.3.3",
     "esm": "^3.2.25",
