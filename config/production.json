@@ -1,0 +1,8 @@
+{
+    "redis": {
+        "namespace": "prod"
+    },
+    "mongo": {
+        "dbName": "spac_prod"
+    }
+}

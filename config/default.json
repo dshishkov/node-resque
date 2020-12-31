@@ -1,0 +1,23 @@
+{
+    "redis": {
+        "pkg": "ioredis",
+        "host": "127.0.0.1"
+    },
+    "reddit": {
+        "clientId": "",
+        "userAgent": "Node.js",
+        "clientSecret": "",
+        "refreshToken": ""
+    },
+    "alpaca": {
+        "keyId": "",
+        "secretKey": "",
+        "paper": true
+    },
+    "mongo": {
+        "uri": "",
+        "dbName": "spac"
+    },
+    "symbols": ["AAPL"],
+    "blacklistedSymbols": ["SPAC", "NAV", "CEO", "MGM", "IPO", "EOD"]
+}

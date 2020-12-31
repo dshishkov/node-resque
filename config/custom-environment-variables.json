@@ -1,0 +1,22 @@
+{
+    "redis": {
+        "host": "REDIS_HOST",
+        "password": "REDIS_PASSWORD"
+    },
+    "reddit": {
+        "clientId": "REDDIT_CLIENT_ID",
+        "clientSecret": "REDDIT_CLIENT_SECRET",
+        "refreshToken": "REDDIT_REFRESH_TOKEN"
+    },
+    "alpaca": {
+        "keyId": "ALPACA_KEY",
+        "secretKey": "ALPACA_SECRET",
+    },
+    "symbols": {
+        "__name": "SYMBOLS",
+        "__format": "json"
+    },
+    "mongo": {
+        "uri": "MONGO_URI"
+    }
+}
