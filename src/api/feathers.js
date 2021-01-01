@@ -3,13 +3,17 @@ import fs from 'fs'
 import configuration from '@feathersjs/configuration'
 import feathers from '@feathersjs/feathers'
 import express from '@feathersjs/express'
+import compress from 'compression'
+import helmet from 'helmet'
 
 let app = express(feathers())
 app.configure(configuration())
 let { port = 80 } = app.get('feathers')
 
-// Parse HTTP JSON bodies
-app.use(express.json())
+// Helmet
+app.use(helmet())
+// Use gzip compression
+app.use(compress())
 // Parse URL-encoded params
 app.use(express.urlencoded({ extended: true }))
 // https://expressjs.com/en/api.html#express.json
