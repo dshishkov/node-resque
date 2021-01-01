@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }))
 // https://expressjs.com/en/api.html#express.json
 app.use(express.json({ limit: '100mb' }))
 // Host static files from the current folder
-app.use(express.static(__dirname.replace('/src', '/public')))
+app.use(express.static(__dirname.replace('/src/api', '/public')))
 // Add REST API support
 app.configure(express.rest())
 // Register a nicer error handler than the default Express one
