@@ -12,6 +12,8 @@ let { port = 80 } = app.get('feathers')
 app.use(express.json())
 // Parse URL-encoded params
 app.use(express.urlencoded({ extended: true }))
+// https://expressjs.com/en/api.html#express.json
+app.use(express.json({ limit: '100mb' }))
 // Host static files from the current folder
 app.use(express.static(__dirname.replace('/src', '/public')))
 // Add REST API support
