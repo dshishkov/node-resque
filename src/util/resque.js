@@ -8,21 +8,22 @@ if (redisConnection.options) {
   redisConnection.options = F.compactObject(redisConnection.options)
 }
 
-export let getQueue = async jobs => {
-  let queue = new Queue({ connection: redisConnection }, jobs)
-  queue.on('error', error => {
-    console.error(error)
-  })
-  await queue.connect()
-  return queue
-}
-
 export let retryFailedJobs = async queue => {
   let failed
   do {
     failed = await queue.failed(0, 100)
     await Promise.all(failed.map(job => queue.retryAndRemoveFailed(job)))
   } while (failed.length > 0)
+}
+
+export let getQueue = async jobs => {
+  let queue = new Queue({ connection: redisConnection }, jobs)
+  queue.on('error', error => {
+    console.error(error)
+  })
+  await queue.connect()
+  await retryFailedJobs(queue)
+  return queue
 }
 
 export let getWorker = async jobs => {

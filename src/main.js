@@ -1,11 +1,6 @@
 import allJobs from './jobs'
 import cron from './util/cron'
-import {
-  getWorker,
-  getQueue,
-  retryFailedJobs,
-  getScheduler,
-} from './util/resque'
+import { getWorker, getQueue, getScheduler } from './util/resque'
 import api from './api'
 
 let init = async () => {
@@ -13,9 +8,6 @@ let init = async () => {
   let jobs = allJobs(app)
   let queue = (app.queue = await getQueue(jobs))
   let [worker, scheduler] = await Promise.all([getWorker(jobs), getScheduler()])
-  app.queue = queue
-
-  await retryFailedJobs(queue)
 
   await cron({ queue, scheduler, jobs })
 
