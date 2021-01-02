@@ -11,11 +11,8 @@ import feathers from './api/feathers'
 let init = async () => {
   let app = await feathers()
   let jobs = allJobs(app)
-  let [queue, worker, scheduler] = await Promise.all([
-    getQueue(jobs),
-    getWorker(jobs),
-    getScheduler(),
-  ])
+  let queue = (app.queue = await getQueue(jobs))
+  let [worker, scheduler] = await Promise.all([getWorker(jobs), getScheduler()])
   app.queue = queue
 
   await retryFailedJobs(queue)
