@@ -2,13 +2,17 @@ import _ from 'lodash/fp'
 import config from 'config'
 import { MongoClient } from 'mongodb'
 
-let getMongoDb = _.memoize(async () => {
+export let getMongoClient = _.memoize(() => {
   let configuration = config.get('mongo')
-  let client = await MongoClient.connect(configuration.uri, {
+  return MongoClient.connect(configuration.uri, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
-  return client.db(configuration.dbName)
+})
+
+let getMongoDb = _.memoize(async () => {
+  let client = await getMongoClient()
+  return client.db(config.get('mongo').dbName)
 })
 
 export let getMongoCollection = _.memoize(async name => (await getMongoDb()).collection(name))

@@ -34,7 +34,9 @@
         "import/no-dynamic-require": 0,
         "global-require": 0,
         "no-await-in-loop": 0,
-        "no-multi-assign": 0
+        "no-multi-assign": 0,
+        "import/prefer-default-export": 0,
+        "no-param-reassign": 0
     },
     "ignorePatterns": ["node_modules/"]
 }

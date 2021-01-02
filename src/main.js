@@ -6,10 +6,10 @@ import {
   retryFailedJobs,
   getScheduler,
 } from './util/resque'
-import feathers from './api/feathers'
+import api from './api'
 
 let init = async () => {
-  let app = await feathers()
+  let app = await api()
   let jobs = allJobs(app)
   let queue = (app.queue = await getQueue(jobs))
   let [worker, scheduler] = await Promise.all([getWorker(jobs), getScheduler()])
