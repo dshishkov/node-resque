@@ -25,5 +25,9 @@
     "feathers": {
         "port": "PORT"
     },
-    "pingUrl": "PING_URL"
+    "pingUrl": "PING_URL",
+    "enabledQueues": {
+        "__name": "ENABLED_QUEUES",
+        "__format": "json"
+    }
 }

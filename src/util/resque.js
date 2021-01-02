@@ -27,7 +27,10 @@ export let getQueue = async jobs => {
 }
 
 export let getWorker = async jobs => {
-  let worker = new MultiWorker({ connection: redisConnection }, jobs)
+  let queues = config.has('enabledQueues')
+    ? config.get('enabledQueues')
+    : undefined
+  let worker = new MultiWorker({ connection: redisConnection, queues }, jobs)
   worker.on('start', () => {
     console.info('worker started')
   })
