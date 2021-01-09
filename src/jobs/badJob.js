@@ -12,7 +12,7 @@ export default {
     console.info('badJob', new Date())
     throw new Error('I am bad')
   },
-  // cron: {
-  //   schedule: '0/1 * * * * *',
-  // },
+  cron: {
+    schedule: '0/1 * * * * *',
+  },
 }

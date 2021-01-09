@@ -27,10 +27,7 @@ export let getQueue = async jobs => {
 }
 
 export let getWorker = async jobs => {
-  let queues = config.has('enabledQueues')
-    ? config.get('enabledQueues')
-    : undefined
-  let worker = new MultiWorker({ connection: redisConnection, queues }, jobs)
+  let worker = new MultiWorker({ connection: redisConnection }, jobs)
   worker.on('start', () => {
     console.info('worker started')
   })
@@ -40,8 +37,10 @@ export let getWorker = async jobs => {
   worker.on('job', (queue, job) => {
     console.info(`working job ${queue} ${JSON.stringify(job)}`)
   })
-  worker.on('reEnqueue', (queue, job, plugin) => {
-    console.info(`reEnqueue job (${plugin}) ${queue} ${JSON.stringify(job)}`)
+  worker.on('reEnqueue', (number, name, job) => {
+    console.info(
+      `reEnqueue job (${name}-${number}) args: ${JSON.stringify(job.args)}`,
+    )
   })
   worker.on('success', (queue, job, result) => {
     console.info(
@@ -50,11 +49,14 @@ export let getWorker = async jobs => {
       }`,
     )
   })
-  worker.on('failure', (queue, job, failure) => {
-    console.info(`job failure ${queue} ${JSON.stringify(job)} >> ${failure}`)
-  })
-  worker.on('error', (error, queue, job) => {
-    console.info(`error ${queue} ${JSON.stringify(job)}  >> ${error}`)
+  worker.on('failure', (number, name, job, failure) => {
+    console.info(
+      `failure job (${name}-${number}),  args: ${JSON.stringify(
+        job.args,
+      )}, failure: ${
+        _.get('stack', failure) ? failure.stack : failure.toString()
+      }`,
+    )
   })
   await worker.start()
   return worker
