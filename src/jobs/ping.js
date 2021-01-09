@@ -16,6 +16,6 @@ export default app => ({
     }
   },
   cron: {
-    schedule: '0/1 * * * *',
+    schedule: '* * * * *',
   },
 })
