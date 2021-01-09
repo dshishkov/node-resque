@@ -9,7 +9,7 @@ let init = async () => {
   let queue = (app.queue = await getQueue(jobs))
   let [worker, scheduler] = await Promise.all([getWorker(jobs), getScheduler()])
 
-  await cron({ queue, scheduler, jobs })
+  cron({ queue, scheduler, jobs })
 
   worker.on('job', async () => {
     console.info('queue stats', await queue.stats())
