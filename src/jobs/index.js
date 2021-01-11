@@ -1,10 +1,12 @@
 import _ from 'lodash/fp'
 import F from 'futil'
 import fs from 'fs'
+import cron from '../util/cron'
+import { getWorker, getQueue, getScheduler } from '../util/resque'
 
-export default app => {
+export default async app => {
   let enabledJobs = app.get('enabledJobs')
-  return _.flow(
+  let jobs = _.flow(
     fs.readdirSync,
     _.pull('index.js'),
     F.arrayToObject(
@@ -21,4 +23,23 @@ export default app => {
     ),
     _.filter('enabled'),
   )(__dirname)
+
+  let queue = (app.queue = await getQueue(jobs))
+  let [worker, scheduler] = await Promise.all([getWorker(jobs), getScheduler()])
+
+  cron({ queue, scheduler, jobs })
+  app.worker = worker
+  worker.on('job', async () => {
+    console.info('queue stats', await queue.stats())
+  })
+
+  let shutdown = async () => {
+    await queue.end()
+    await scheduler.end()
+    await worker.end()
+    process.exit(0)
+  }
+
+  process.on('SIGTERM', shutdown)
+  process.on('SIGINT', shutdown)
 }
