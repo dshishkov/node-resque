@@ -17,7 +17,7 @@ export default async app => {
         let job = _.isFunction(jobDefinition)
           ? jobDefinition(app)
           : jobDefinition
-        job.enabled = _.isEmpty(enabledJobs) || _.includes(enabledJobs, name)
+        job.enabled = _.isEmpty(enabledJobs) || _.includes(name, enabledJobs)
         return job
       },
     ),
