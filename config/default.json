@@ -12,7 +12,7 @@
     "alpaca": {
         "keyId": "",
         "secretKey": "",
-        "paper": true
+        "paper": false
     },
     "mongo": {
         "uri": "",

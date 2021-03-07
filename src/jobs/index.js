@@ -21,7 +21,7 @@ export default async app => {
         return job
       },
     ),
-    _.filter('enabled'),
+    _.pickBy('enabled'),
   )(__dirname)
 
   let queue = (app.queue = await getQueue(jobs))
